@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>"subfraction analysis : prepare data for sharing"</title>
+<!-- 2015-08-23 Sun 15:06 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Heejung Shim" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">"subfraction analysis : prepare data for sharing"</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Plan</a></li>
+<li><a href="#sec-2">2. Prepare directory to save data</a></li>
+<li><a href="#sec-3">3. Get normalized phenotypes</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Script</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. Get effect size estimates and standard error</a></li>
+<li><a href="#sec-5">5. Get genotypes for SNPs reported in our paper</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Plan</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Effect size estimates and standard error for every pairs of `one' SNP and `one' quantile transformed phenotype.
+<ul class="org-ul">
+<li>Use software <a href="http://www.xzlab.org/software.html">GEMMA</a> with -lm optiion.
+</li>
+</ul>
+</li>
+<li>(identified) genotypes and corresponding phenotypes for just the handful of SNPs we highlight in the manuscript.
+<ul class="org-ul">
+<li>get normalized phenotypes
+</li>
+<li>extract particular genotypes
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Prepare directory to save data</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+I create directory to save data:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">cd /mnt/lustre/home/shim/subfraction/
+mkdir data_shared
+cd data_shared
+mkdir normalized_phenotypes
+mkdir genotypes
+mkdir summary_statistics
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Get normalized phenotypes</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+I modified a script here:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">cd /mnt/lustre/home/shim/subfraction/revision/code/
+vi revise_correlation_final_figure.R
+</pre>
+</div>
+
+<p>
+Normalized averages of pre-treatment measurements and post-treatment measurements are saved in:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">vi /mnt/lustre/home/shim/subfraction/data_shared/normalized_phenotypes/average.txt
+</pre>
+</div>
+<p>
+and normalized differences between post-treatment and pre-treatment measures are saved in:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">vi /mnt/lustre/home/shim/subfraction/data_shared/normalized_phenotypes/difference.txt
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Script</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+
+<pre class="src src-R">path.out = "/mnt/lustre/home/shim/subfraction/data_shared/normalized_phenotypes/"
+
+PhenoNames_o = c("A", "Ld", "i1", "i2", "i3", "l1", "l2a", "l2b", "l3a", "l3b",  "l4a", "l4b", "H", "L", "Tg", "T")   
+new_IX = c(14,2,3:12, 15, 13, 16, 1)
+PhenoNames = PhenoNames_o[new_IX]
+PhenoNames
+# [1] "L"   "Ld"  "i1"  "i2"  "i3"  "l1"  "l2a" "l2b" "l3a" "l3b" "l4a" "l4b"
+#[13] "Tg"  "H"   "T"   "A"  
+
+## Average 
+dat15 = read.table("/mnt/lustre/home/shim/subfraction/data/final_pheno_cor_v2/phenotype_ready/Sum_II_1_a", as.is = TRUE)
+dat1 = read.table("/mnt/lustre/home/shim/subfraction/data/final_pheno_cor_v2/phenotype_ready/TC_sum", as.is = TRUE)
+numIND = dim(dat15)[1]
+data = matrix(data=NA, nc=16, nr = numIND)
+data[,1:15] = as.matrix(dat15)
+data[,16] = as.matrix(dat1)
+new_data = data[,new_IX]
+
+write.table(new_data, file = paste0(path.out, "average.txt"), quote=FALSE, col.names = PhenoNames, row.names=FALSE)
+
+## Difference
+dat15 = read.table("/mnt/lustre/home/shim/subfraction/data/final_pheno_cor_v2/phenotype_ready/Diff_II_1_a", as.is = TRUE)
+dat1 = read.table("/mnt/lustre/home/shim/subfraction/data/final_pheno_cor_v2/phenotype_ready/TC_diff", as.is = TRUE)
+numIND = dim(dat15)[1]
+data = matrix(data=NA, nc=16, nr = numIND)
+data[,1:15] = as.matrix(dat15)
+data[,16] = as.matrix(dat1)
+new_data = data[,new_IX]
+
+write.table(new_data, file = paste0(path.out, "difference.txt"), quote=FALSE, col.names = PhenoNames, row.names=FALSE)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Get effect size estimates and standard error</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+SNPs included in our analysis is only goodSNPs (7,836,525). Genotype files are in:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">cd /mnt/lustre/home/shim/subfraction/data/allSNPs/goodSNPs/
+</pre>
+</div>
+
+<p>
+Create directory to run scripts:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">cd /mnt/lustre/home/shim/subfraction/data_shared/
+mkdir runGEMMA
+mkdir runGEMMA/pheno.dat
+mkdir runGEMMA/com
+mkdir runGEMMA/err
+</pre>
+</div>
+
+<p>
+Prepare phenotypes:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R">## average
+path.input = "/mnt/lustre/home/shim/subfraction/data_shared/normalized_phenotypes/average.txt"
+pheno.dat = read.table(path.input, header = TRUE)
+pheno.name = names(pheno.dat)
+
+path.output = "/mnt/lustre/home/shim/subfraction/data_shared/runGEMMA/pheno.dat/average."
+for(i in 1:length(pheno.name)){
+  write.table(pheno.dat[,i], file = paste0(path.output, pheno.name[i]), quote=FALSE, row.names = FALSE, col.names = FALSE)
+}
+
+## difference
+path.input = "/mnt/lustre/home/shim/subfraction/data_shared/normalized_phenotypes/difference.txt"
+pheno.dat = read.table(path.input, header = TRUE)
+pheno.name = names(pheno.dat)
+
+path.output = "/mnt/lustre/home/shim/subfraction/data_shared/runGEMMA/pheno.dat/difference."
+for(i in 1:length(pheno.name)){
+  write.table(pheno.dat[,i], file = paste0(path.output, pheno.name[i]), quote=FALSE, row.names = FALSE, col.names = FALSE)
+}
+</pre>
+</div>
+
+<p>
+Prepare submission files:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R">get.com.run.GEMMA &lt;- function(phenoT, phenoN){
+output.dir.name = paste0(phenoT, ".", phenoN)
+com.path = "/mnt/lustre/home/shim/subfraction/data_shared/runGEMMA/"
+file.name = paste0(com.path, "com/", output.dir.name, ".sh")
+
+com = "#!/bin/bash"
+cat(com, file = file.name)
+cat("\n", file = file.name, append = TRUE)
+
+com = "#$ -t 1-22"
+cat(com, file = file.name, append = TRUE)
+cat("\n", file = file.name, append = TRUE)	
+
+com = paste("#$ -o ", com.path, "err/out.$JOB_ID", sep="")
+cat(com, file = file.name, append = TRUE)
+cat("\n", file = file.name, append = TRUE)	
+
+com = paste("#$ -e ", com.path, "err/err.$JOB_ID", sep="")
+cat(com, file = file.name, append = TRUE)
+cat("\n", file = file.name, append = TRUE)	
+
+com = paste0("cd ", com.path)
+cat(com, file = file.name, append = TRUE)
+cat("\n", file = file.name, append = TRUE)
+
+geno.path = paste0("/mnt/lustre/home/shim/subfraction/data/allSNPs/goodSNPs/sub_chr$SGE_TASK_ID.geno")
+pheno.path = paste0(com.path, "pheno.dat/", phenoT, ".", phenoN)
+com = paste0("~shim/bin/gemma -g ", geno.path, " -p ", pheno.path, " -maf 0 -r2 1 -miss 1 -lm -o ", output.dir.name, ".$SGE_TASK_ID")
+cat(com, file = file.name, append = TRUE)
+cat("\n", file = file.name, append = TRUE)
+
+}
+
+path.input = "/mnt/lustre/home/shim/subfraction/data_shared/normalized_phenotypes/average.txt"
+pheno.name = names(read.table(path.input, header = TRUE))
+
+phenoT = "average"
+for(pp in 1:length(pheno.name)){
+  phenoN = pheno.name[pp]
+  get.com.run.GEMMA(phenoT, phenoN)
+}
+phenoT = "difference"
+for(pp in 1:length(pheno.name)){
+  phenoN = pheno.name[pp]
+  get.com.run.GEMMA(phenoT, phenoN)
+}
+</pre>
+</div>
+
+<p>
+I submitted jobs here:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R">cd /mnt/lustre/home/shim/subfraction/data_shared/runGEMMA/com/
+for file in *.sh ; do echo $file; done
+for file in *.sh ; do qsub -l h_vmem=5g -V $file; done
+</pre>
+</div>
+
+<p>
+Collect outputs and put them into one file: 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R">path.output = "/mnt/lustre/home/shim/subfraction/data_shared/summary_statistics/"
+path.input = "/mnt/lustre/home/shim/subfraction/data_shared/runGEMMA/output/"
+
+path.temp = "/mnt/lustre/home/shim/subfraction/data_shared/normalized_phenotypes/average.txt"
+pheno.name = names(read.table(path.temp, header = TRUE))
+
+## Make names for output
+name.list = rep(NA, length(pheno.name)*2)
+ix = 1
+for(pp in 1:length(pheno.name)){
+  name.list[ix:(ix+1)] = paste0(pheno.name[pp], c(".beta", ".se"))
+  ix = ix + 2
+}
+
+phenoT = "average"
+for(chr in 1:22){
+  pp = 1
+  phenoN = pheno.name[pp]
+  path.file = paste0(path.input, phenoT, ".", phenoN, ".", chr, ".assoc.txt")
+  dat = read.table(path.file, header = T, as.is = TRUE)
+  dat.info = data.frame(rs = dat$rs, allele1 = dat$allele1, allele0 = dat$allele0, af = dat$af)
+
+  path.each.output = paste0(path.output, phenoT, ".", "chr", chr, ".summary.txt")
+  
+  res.dat = matrix(data=NA, nr = dim(dat)[1], nc = length(pheno.name)*2)
+  for(pp in 1:length(pheno.name)){
+    phenoN = pheno.name[pp]
+    path.file = paste0(path.input, phenoT, ".", phenoN, ".", chr, ".assoc.txt")
+    dat = read.table(path.file, header = T, as.is = TRUE)
+    res.dat[,((2*pp -1):(2*pp))] = as.matrix(dat[,9:10])
+  }
+  
+  colnames(res.dat) = name.list
+  final.out = cbind(dat.info, res.dat)
+
+  write.table(final.out, file = path.each.output, quote=FALSE, row.names = FALSE, col.names = TRUE)
+}
+
+
+phenoT = "difference"
+for(chr in 20:22){
+  pp = 1
+  phenoN = pheno.name[pp]
+  path.file = paste0(path.input, phenoT, ".", phenoN, ".", chr, ".assoc.txt")
+  dat = read.table(path.file, header = T, as.is = TRUE)
+  dat.info = data.frame(rs = dat$rs, allele1 = dat$allele1, allele0 = dat$allele0, af = dat$af)
+
+  path.each.output = paste0(path.output, phenoT, ".", "chr", chr, ".summary.txt")
+  
+  res.dat = matrix(data=NA, nr = dim(dat)[1], nc = length(pheno.name)*2)
+  for(pp in 1:length(pheno.name)){
+    phenoN = pheno.name[pp]
+    path.file = paste0(path.input, phenoT, ".", phenoN, ".", chr, ".assoc.txt")
+    dat = read.table(path.file, header = T, as.is = TRUE)
+    res.dat[,((2*pp -1):(2*pp))] = as.matrix(dat[,9:10])
+  }
+  
+  colnames(res.dat) = name.list
+  final.out = cbind(dat.info, res.dat)
+
+  write.table(final.out, file = path.each.output, quote=FALSE, row.names = FALSE, col.names = TRUE)
+}
+</pre>
+</div>
+
+<p>
+Now summary statistics (effect size and standard error for each SNP and phenotype pair) are saved in 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">cd /mnt/lustre/home/shim/subfraction/summary_statistics/
+</pre>
+</div>
+<p>
+Each file contains SNPname, two alleles, MAF, effect size and standard error for each phenotype.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Get genotypes for SNPs reported in our paper</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+These are SNPs reported in GWAS either irrespective of statin exposure or of statin response.
+</p>
+<ul class="org-ul">
+<li>chr1: rs7528419
+</li>
+<li>chr19: rs7412, rs157581
+</li>
+<li>chr6: rs55730499, 6-161069320, rs10455872
+</li>
+<li>chr16: rs247616, rs11076175
+</li>
+</ul>
+
+<p>
+First, let's extract genotype information using these commands:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">cd ~/subfraction/data/allSNPs/goodSNPs/
+grep "rs7528419" sub_chr1.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/rs7528419.geno
+grep "rs7412" sub_chr19.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/rs7412.geno
+grep "rs157581" sub_chr19.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/rs157581.geno
+grep "rs55730499" sub_chr6.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/rs55730499.geno
+grep "6-161069320" sub_chr6.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/6-161069320.geno
+grep "rs10455872" sub_chr6.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/rs10455872.geno
+grep "rs247616" sub_chr16.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/rs247616.geno
+grep "rs11076175" sub_chr16.geno &gt; /mnt/lustre/home/shim/subfraction/data_shared/genotypes/rs11076175.geno
+</pre>
+</div>
+
+<p>
+Make mean genotype files:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-R">genotype_name = c("rs7528419", "rs7412", "rs157581", "rs55730499", "6-161069320", "rs10455872", "rs247616", "rs11076175")
+path = "/mnt/lustre/home/shim/subfraction/data_shared/genotypes/"
+
+num = length(genotype_name)
+
+for(i in 1:num){
+
+  geno_input = paste(genotype_name[i], ".geno", sep="")
+  path_each = paste(path, geno_input, sep="")
+  
+  genoD1 = read.table(path_each, as.is = TRUE)
+  numIND = 1868
+
+  genoM = matrix(data=NA, nc = (numIND + 3), nr = 1)
+  genoM[1,1:3] = as.matrix(genoD1[1,1:3])
+  IX2 = (1:numIND)*2 +3
+  IX1 = (1:numIND)*2 +3 - 1
+
+  genoM[1,4:(numIND+3)] = as.matrix(2*genoD1[1,IX1] + genoD1[1,IX2])
+
+  geno_out = paste(genotype_name[i], ".meangeno",sep="")
+  path_each = paste(path, geno_out, sep="")
+
+  write.table(genoM, path_each, quote= FALSE, row.names = FALSE, col.names = FALSE)
+
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Heejung Shim</p>
+<p class="date">Created: 2015-08-23 Sun 15:06</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
